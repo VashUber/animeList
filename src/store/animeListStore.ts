@@ -1,20 +1,25 @@
 import axios from "axios"
 import { defineStore } from "pinia"
+import { anime } from "../types"
 
 const useAnimeList = defineStore({
   id: "AnimeList",
   state: () => ({
-    list: [],
+    list: [] as Array<anime>,
   }),
   actions: {
     setList(page: number) {
       axios
         .get(`https://api.jikan.moe/v3/top/anime/${page}`)
-        .then((response) => (this.list = response.data))
+        .then((response) => (this.list = response.data.top))
     },
   },
   getters: {
     getList: (state) => state.list,
+    getAnime: (state) => {
+      return (animeId: string) =>
+        state.list.find((elem) => elem.mal_id === animeId)
+    },
   },
 })
 

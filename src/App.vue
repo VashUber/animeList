@@ -1,28 +1,31 @@
 <template>
   <div class="app">
-    {{list}}
+    <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { onMounted } from '@vue/runtime-core';
-import useAnimeList from './store/animeListStore';
+  import { onMounted } from "vue"
+  import useAnimeList from "./store/animeListStore"
 
-const animeList = useAnimeList()
-const list = computed(() => animeList.getList)
-onMounted(() => animeList.setList(1))
+  const animeList = useAnimeList()
+  onMounted(() => animeList.setList(1))
 </script>
 
 <style lang="scss">
   @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+  img {
+    display: block;
+  }
 
   * {
     padding: 0;
     margin: 0;
   }
   .app {
+    padding: 10px 150px 0 10px;
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    overflow-x: hidden;
   }
 </style>
