@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from "vue"
+  import { computed, onBeforeUpdate, onMounted, ref } from "vue"
   import Card from "../components/Card.vue"
   import useAnimeList from "../store/animeListStore"
 
@@ -16,7 +16,7 @@
 <style scoped lang="scss">
   .list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 15px;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="card" @mouseover="over" @mouseleave="leave">
     <transition name="show">
-      <MiniCard :item="item" class="card__minicard" v-show="show" />
+      <MiniCard :item="item" class="card__minicard" v-if="show" />
     </transition>
     <img :src="item.image_url" :alt="item.title" class="card__img" />
     <p class="card__title">{{ item.title }}</p>
@@ -37,16 +37,19 @@
   .card {
     position: relative;
     justify-self: center;
-    width: 130px;
+    padding: 10px;
+    width: 200px;
+    height: 340px;
+    box-shadow: 0px 0px 7px 2px rgba(154, 164, 255, 0.2);
 
     &__img {
-      width: 130px;
-      height: 200px;
+      width: 200px;
+      height: 300px;
       padding-bottom: 5px;
     }
 
     &__title {
-      width: 130px;
+      width: 200px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -54,11 +57,10 @@
   }
   .show-enter-active,
   .show-leave-active {
-    transition: all 0.4s ease-out;
+    transition: all 0.2s ease-out;
   }
   .show-enter-from,
   .show-leave-to {
-    transform: translateX(-20px);
     opacity: 0;
   }
 </style>

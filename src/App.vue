@@ -24,8 +24,10 @@
     margin: 0;
   }
   .app {
-    padding: 10px 150px 0 10px;
+    padding: 20px;
     font-family: "Roboto", sans-serif;
     overflow-x: hidden;
+    background: $bg;
+    color: #fff;
   }
 </style>
