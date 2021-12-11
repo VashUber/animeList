@@ -1,5 +1,5 @@
 export interface anime {
-  mal_id: string
+  mal_id: number
   rank: number
   title: string
   url: string

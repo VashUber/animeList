@@ -1,15 +1,31 @@
 <template>
   <div class="app">
     <router-view />
+    {{ anime }}
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted } from "vue"
+  import { computed, onMounted, watch } from "vue"
+  import { useRoute } from "vue-router"
   import useAnimeList from "./store/animeListStore"
 
   const animeList = useAnimeList()
-  onMounted(() => animeList.setList(1))
+  const route = useRoute()
+  const getAnime = animeList.getAnime
+
+  const anime = computed(() => getAnime(+route.params?.id))
+
+  onMounted(async () => await animeList.setList(1))
+
+  watch([route, anime], () => {
+    if (route.name) {
+      document.title = route.name.toString()
+
+      if (route.name === "anime")
+        document.title = anime.value?.title ? anime.value?.title : "loading..."
+    }
+  })
 </script>
 
 <style lang="scss">
@@ -29,5 +45,6 @@
     overflow-x: hidden;
     background: $bg;
     color: #fff;
+    min-height: calc(100vh - 40px);
   }
 </style>

@@ -3,7 +3,9 @@
     <transition name="show">
       <MiniCard :item="item" class="card__minicard" v-if="show" />
     </transition>
-    <img :src="item.image_url" :alt="item.title" class="card__img" />
+    <router-link :to="'/anime/' + item.mal_id">
+      <img :src="item.image_url" :alt="item.title" class="card__img" />
+    </router-link>
     <p class="card__title">{{ item.title }}</p>
     <p class="card__type">Type: {{ item.type }}</p>
   </div>

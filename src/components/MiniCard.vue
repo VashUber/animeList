@@ -3,8 +3,8 @@
     class="miniCard"
     ref="minicard"
     :class="{
-      miniCard__overflow: isOverFlow,
-      miniCard__notOverflow: !isOverFlow,
+      miniCard_overflow: isOverFlow,
+      miniCard_notOverflow: !isOverFlow,
     }"
   >
     <h2>{{ item.title }}</h2>
@@ -45,15 +45,15 @@
     top: -1px;
     padding: 10px;
     box-sizing: border-box;
-    background: rgb(68, 60, 114);
+    background: $dark_blue;
     display: flex;
     flex-direction: column;
 
-    &__notOverflow {
+    &_notOverflow {
       left: 220px;
     }
 
-    &__overflow {
+    &_overflow {
       right: 220px;
     }
 

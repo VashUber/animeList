@@ -1,6 +1,7 @@
 import axios from "axios"
 import { defineStore } from "pinia"
 import { anime } from "../types"
+import { computed } from "vue"
 
 const useAnimeList = defineStore({
   id: "AnimeList",
@@ -8,8 +9,8 @@ const useAnimeList = defineStore({
     list: [] as Array<anime>,
   }),
   actions: {
-    setList(page: number) {
-      axios
+    async setList(page: number) {
+      await axios
         .get(`https://api.jikan.moe/v3/top/anime/${page}`)
         .then((response) => (this.list = response.data.top))
     },
@@ -17,7 +18,7 @@ const useAnimeList = defineStore({
   getters: {
     getList: (state) => state.list,
     getAnime: (state) => {
-      return (animeId: string) =>
+      return (animeId: number) =>
         state.list.find((elem) => elem.mal_id === animeId)
     },
   },
