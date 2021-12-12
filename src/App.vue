@@ -6,24 +6,32 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, watch } from "vue"
-  import { useRoute } from "vue-router"
+  import { computed, onMounted, onUpdated, watch } from "vue"
+  import { useRoute, useRouter } from "vue-router"
   import useAnimeList from "./store/animeListStore"
 
   const animeList = useAnimeList()
   const route = useRoute()
+  const router = useRouter()
   const getAnime = animeList.getAnime
 
   const anime = computed(() => getAnime(+route.params?.id))
 
-  onMounted(async () => await animeList.setList(1))
+  onMounted(async () => {
+    await router.isReady()
+    await animeList.setList(+route.params?.page || 1)
+  })
 
-  watch([route, anime], () => {
+  watch([route, anime], async () => {
     if (route.name) {
-      document.title = route.name.toString()
+      document.title = "Anime list " + (route.params?.page || 1)
+
+      if (route.params?.page) {
+        await animeList.setList(+route.params?.page || 1)
+      }
 
       if (route.name === "anime")
-        document.title = anime.value?.title ? anime.value?.title : "loading..."
+        document.title = anime.value?.title || "loading..."
     }
   })
 </script>

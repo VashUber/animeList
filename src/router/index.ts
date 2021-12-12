@@ -4,10 +4,16 @@ import Anime from "../pages/Anime.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
-    name: "Anime list",
+    name: "list",
     path: "/",
     component: List,
   },
+  {
+    name: "list-with-page",
+    path: "/:page",
+    component: List,
+  },
+
   {
     name: "anime",
     path: "/anime/:id",
