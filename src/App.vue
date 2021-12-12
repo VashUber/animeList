@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <router-view />
-    {{ anime }}
   </div>
 </template>
 
@@ -20,19 +19,12 @@
   onMounted(async () => {
     await router.isReady()
     await animeList.setList(+route.params?.page || 1)
+    document.title = anime.value?.title || "Anime list"
   })
 
-  watch([route, anime], async () => {
-    if (route.name) {
-      document.title = "Anime list " + (route.params?.page || 1)
-
-      if (route.params?.page) {
-        await animeList.setList(+route.params?.page || 1)
-      }
-
-      if (route.name === "anime")
-        document.title = anime.value?.title || "loading..."
-    }
+  watch(route, async () => {
+    if (route.params?.page) await animeList.setList(+route.params?.page || 1)
+    document.title = anime.value?.title || "Anime list"
   })
 </script>
 
