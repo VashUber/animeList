@@ -2,9 +2,9 @@
   <div class="list">
     <Card v-for="item in list" :key="item.mal_id" :item="item" />
   </div>
-  <div>
-    <Button :path="pathPrev" />
-    <Button :path="pathNext" />
+  <div class="button-group">
+    <Button :path="pathPrev" text="prev" class="button-group__button" />
+    <Button :path="pathNext" text="next" class="button-group__button" />
   </div>
 </template>
 
@@ -20,8 +20,7 @@
   const list = computed(() => animeList.getList)
   const pathNext = computed(() => (+route.params?.page || 1) + 1)
   const pathPrev = computed(() => {
-    if (+route.params?.page !== 1 && route.params?.page)
-      return +route.params?.page - 1
+    if (+route.params?.page !== 1 && route.params?.page) return +route.params?.page - 1
     return ""
   })
 </script>
@@ -31,5 +30,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 15px;
+  }
+
+  .button-group {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    &__button:last-child {
+      margin-left: 10px;
+    }
   }
 </style>
